@@ -46,6 +46,63 @@ body{
 }
 
 
+
+
+/* Progress Bar */
+
+.stat-container{
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+
+.details {
+    width: 100%;
+}
+
+.details h3{
+    color: #fff;
+}
+
+#progressbar {
+    width: 100%;
+    height: 7px;
+    background: #40827d4c;
+    border-radius: 20px;
+    position: relative;
+    margin-top: 15px;
+}
+
+#progress{
+    width: 0%;
+    height: 100%;
+    background: #40827d;
+    border-radius: 20px;
+    transition: width 0.3s ease;
+}
+
+#numbers{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: #40827d;
+    border: 2px solid rgba(16, 40, 81, 0.3);
+    font-weight: bold;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+/* Progress Bar */
+
+
 .input-area{
     display: flex;
     justify-content: space-between;
