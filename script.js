@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const taskInput = document.getElementById('task-input')
 
     const addTaskBtn = document.getElementById('add-task-btn')
@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
         li.innerHTML = `
          <input type="checkbox" class="checkbox">
          <span>${taskText}</span>
+        <div class="task-buttons">
+           <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+           <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+         </div>
         `
 
         
