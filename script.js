@@ -14,24 +14,60 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    const addTask = (event) =>{
-        event.preventDefault();
-        const taskText = taskInput.value.trim();
+    // Function to add tasks
+    const addTask = (text, completed = false, checkCompletion = true) =>{
+
+        const taskText = text ||  taskInput.value.trim();
         if(!taskText){
             return;
         }
 
         const li = document.createElement('li');
         li.innerHTML = `
-         <input type="checkbox" class="checkbox">
+         <input type="checkbox" class="checkbox" ${completed ? 'checked' : ''} />
          <span>${taskText}</span>
-        <div class="task-buttons">
+         <div class="task-buttons">
            <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
            <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
          </div>
         `
 
-        
+        // Function to delete tasks
+        li.querySelector('.delete-btn').addEventListener('click', () =>{
+            li.remove();
+            toggleEmptyState();
+        });
+
+
+        // Function to edit tasks
+        const editBtn = li.querySelector('.edit-btn');
+
+        const checkbox = li.querySelector('.checkbox');
+
+        editBtn.addEventListener('click', () => {
+            if(!checkbox.checked){
+                taskInput.value = li.querySelector('span').textContent;
+                li.remove();
+                toggleEmptyState();
+            }
+        })
+
+
+        // Function to mark task as completed 
+        if (completed){
+            li.classList.add('completed');
+            editBtn.disabled  = true;
+            editBtn.style.opacity = '0.5';
+            editBtn.style.pointerEvents = 'none'
+        }
+
+        checkbox.addEventListener('change' ,() =>{
+            const ischecked = checkbox.checked;
+            li.classList.toggle('completed', ischecked);
+            editBtn.disabled  = ischecked
+            editBtn.style.opacity = ischecked ? '0.5' : '1';
+            editBtn.style.pointerEvents = ischecked ? 'none' : 'auto'
+        })
 
 
         taskList.appendChild(li);
@@ -39,11 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleEmptyState();
     };
 
-    addTaskBtn.addEventListener('click',addTask);
+
+    addTaskBtn.addEventListener('click', () => addTask());
 
     taskInput.addEventListener('keydown', (e) => {
         if(e.key === "Enter"){
-            addTask(e);
+            e.preventDefault();
+            addTask();
         }
     })
 })
